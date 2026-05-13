@@ -39,21 +39,14 @@ public class Day8
     }
 
     
-    static void Reverse(int arr[],int n){
-        int i=0;
-        int j=n-1;
-        while(i<=j){
-            int temp = arr[i];
-            arr[i]=arr[j];
-            arr[j] = temp;
-            i++;
-            j--;
-        }
-    }
-    
-    static void PrintArray(int arr[],int n){
-        for(int i=0;i<n;i++){
-            System.out.print(arr[i]+" ");
+    static void Reverse(int arr[],int n,int left ,int right){
+        
+        while(left<=right){
+            int temp = arr[left];
+            arr[left]=arr[right];
+            arr[right] = temp;
+            left++;
+            right--;
         }
     }
 
@@ -72,6 +65,37 @@ public class Day8
         }
         arr[n-1] = temp;
     }
+
+    static void RightShiftByK(int arr[],int n,int k){
+        Reverse(arr,n,0,n-1); // reverse whole arr
+        Reverse(arr,n,0,k-1); //reverse first k elements
+        Reverse(arr, n, k, n-1);
+    }
+
+    static void LeftShiftByK(int arr[],int n,int k){
+        Reverse(arr, n, 0, k-1); // reverse firts k elements 
+        Reverse(arr, n, k, n-1); // reverse remaining elements
+        Reverse(arr, n, 0, n-1); // reverse whole array 
+    }
+
+    static void ReverseInBetween(int arr[],int n,int left ,int right){
+        int l = left;
+        int r = right;
+        while(l <= r){
+            int temp = arr[l];
+            arr[l] = arr[r];
+            arr[r] = temp;
+            l++;
+            r--;
+        }
+    }
+    
+    static void PrintArray(int arr[],int n){
+        for(int i=0;i<n;i++){
+            System.out.print(arr[i]+" ");
+        }
+    }
+
 	public static void main(String[] args) {
 		int arr[] = new int[6];
 		arr[0] = 1;
@@ -95,8 +119,14 @@ public class Day8
         // Reverse(arr,n);
         // Palindrome(arr, n);
         // RightShift(arr, n);
-        LeftShift(arr, n);
-		PrintArray(arr,n);
+        // LeftShift(arr, n);
+        // ReverseInBetween(arr,n,1,3);
+        RightShiftByK(arr, n, 2);
+        PrintArray(arr, n);
+        System.out.println();
+        // LeftShiftByK(arr, n, 2);
+        
+		// PrintArray(arr,n);
 		
 	}
 }
